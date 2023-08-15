@@ -1,1 +1,2 @@
 # Onbording_api
+This project involves the creation of an onboarding API using OpenAPI 3.0.3. The API manages a list of students using GET and POST operations. Student details are represented in JSON format.

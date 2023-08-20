@@ -1,0 +1,137 @@
+openapi: 3.0.3
+info:
+  title: Teacher API
+  version: '1.2'
+  description: API for managing teachers and courses
+  contact:
+    email: hei.lovatiana@gmail.com
+servers:
+  - url: http://teacher.com
+
+tags:
+  - name: teachers
+    description: Operations related to teacher management
+  - name: courses
+    description: Operations related to course management
+
+components:
+  schemas:
+    Teacher:
+      type: object
+      properties:
+        id:
+          type: integer
+        firstName:
+          type: string
+        lastName:
+          type: string
+
+    Course:
+      type: object
+      properties:
+        name:
+          type: string
+        code:
+          type: string
+        duration:
+          type: string
+
+paths:
+  /teachers:
+    get:
+      tags:
+        - teachers
+      summary: Get all teachers
+      operationId: getAllTeachers
+      responses:
+        '200':
+          description: Successfully
+          content:
+            application/json:
+              examples:
+                teachers:
+                  value:
+                    - id: 1
+                      firstName: John
+                      lastName: Doe
+                    - id: 2
+                      firstName: Jane
+                      lastName: Smith
+
+    post:
+      tags:
+        - teachers
+      summary: Add a new teacher
+      operationId: addTeacher
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Teacher'
+      responses:
+        '201':
+          description: Add teacher successfully
+          content:
+            application/json:
+              examples:
+                teacher:
+                  value:
+                    id: 3
+                    firstName: Alex
+                    lastName: Johnson
+
+  '/teachers/{teacherId}/courses':
+    get:
+      tags:
+        - courses
+      summary: Get courses of a teacher
+      operationId: getCoursesOfTeacher
+      parameters:
+        - name: teacherId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the teacher
+      responses:
+        '200':
+          description: Successfully
+          content:
+            application/json:
+              examples:
+                courses:
+                  value:
+                    - name: Algorithmic
+                      code: Prog2
+                      duration: 10 weeks
+
+    post:
+      tags:
+        - courses
+      summary: Add a course to a teacher
+      operationId: addCourseToTeacher
+      parameters:
+        - name: teacherId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the teacher
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Course'
+      responses:
+        '201':
+          description: Add course successfully
+          content:
+            application/json:
+              examples:
+                course:
+                  value:
+                    name: introduction to systems and networks
+                    code: Sys1
+                    duration: 15 weeks

@@ -52,11 +52,11 @@ paths:
                 teachers:
                   value:
                     - id: 1
-                      firstName: John
-                      lastName: Doe
+                      firstName: Toky
+                      lastName: RAMAROZAKA
                     - id: 2
-                      firstName: Jane
-                      lastName: Smith
+                      firstName: Ryan
+                      lastName: Andriamahery
 
     post:
       tags:
@@ -78,8 +78,8 @@ paths:
                 teacher:
                   value:
                     id: 3
-                    firstName: Alex
-                    lastName: Johnson
+                    firstName: Lou
+                    lastName: Andria
 
   '/teachers/{teacherId}/courses':
     get:
